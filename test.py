@@ -1,6 +1,11 @@
 __author__ = 'xuhuan'
+import re
 
-if __name__ == '__main__':
-    file1 = 1
-    i = input()
-    print(file1)
+a = input('input:')
+print(11)
+print(a)
+print(11)
+if a == '\n':
+    print(1)
+else:
+    print(a)

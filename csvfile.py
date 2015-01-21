@@ -80,10 +80,19 @@ class CsvFile(object):
             with open(self.file_path, 'r') as f:
                 reader = csv.reader(f)
                 rows = [row for row in reader]
+            s = rows[3][1]
+            if s:
+                ds = {}
+                ss = s.split('/')
+                del ss[0]
+                for i in ss:
+                    a, b = i.split('：')
+                    ds.update({a: b})
             rows = rows[5:]
             dicts = []
             for i in range(len(rows) - 1):
                 dct = dict(zip(rows[0], rows[i + 1]))
+                dct.update(ds)
                 dicts.append(dct)
         self.data = dicts
         return dicts

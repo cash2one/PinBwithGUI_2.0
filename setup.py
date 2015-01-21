@@ -12,5 +12,5 @@ setup(
     name="pinbiao",
     version="0.1",
     description="Pinbiao",
-    executables=[Executable("test.py", base=base, icon='image/icon.ico')]
+    executables=[Executable("pinbiao.py", base=base, icon='image/icon.ico')]
     )

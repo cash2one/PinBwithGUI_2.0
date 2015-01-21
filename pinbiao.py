@@ -138,18 +138,18 @@ def pinbiao(f1, f2, mod=None):
 
 def file_list(raw_path):
     all_files = os.listdir(raw_path)
-    csv_files = []
+    csv_file = []
     for i in all_files:
         extension = i.split('.')[-1]
         if extension == 'csv':
-            csv_files.append(i)
-    for i in csv_files:
-        print(csv_files.index(i) + 1, ',', i, '\n')
-    return csv_files
+            csv_file.append(i)
+    for i in csv_file:
+        print(csv_file.index(i) + 1, ',', i, '\n')
+    return csv_file
 
 if __name__ == '__main__':
-    input_folder = 'input'
-    output_folder = 'output'
+    input_folder = '原始表格'
+    output_folder = '拼表结果'
     if os.path.isdir(input_folder):
         pass
     else:
@@ -159,17 +159,17 @@ if __name__ == '__main__':
     else:
         os.mkdir(output_folder)
     csv_files = file_list(input_folder)
-    file1 = int(input(u'q1'))
-    while file1 not in csv_files.keys():
-        file1 = int(input(u'q1'))
-    file2 = int(input(u'q2'))
-    while file2 not in csv_files.keys() or file2 == file1:
-        file2 = int(input(u'q2'))
-    file1 = input_folder + '/' + file_list[file1]
-    file2 = input_folder + '/' + file_list[file2]
+    file1 = int(input(u'选择第一个表格:'))
+    while file1 - 1 not in range(len(csv_files)):
+        file1 = int(input(u'重选第一个表格:'))
+    file2 = int(input(u'选择第二个表格:'))
+    while file2 - 1 not in range(len(csv_files)) or file2 == file1:
+        file2 = int(input(u'重选第二个表格:'))
+    file1 = input_folder + '/' + csv_files[file1 - 1]
+    file2 = input_folder + '/' + csv_files[file2 - 1]
     result, info = pinbiao(file1, file2)
     result_name = info['file_from'] + '-' + info['game'] + '-' + info['begin_date'] + '至' + info['end_date']
-    with open(result_name + '.csv', 'w', newline='') as f:
+    with open(output_folder + '/' + result_name + '.csv', 'w', newline='') as f:
         header = keys_order[info['file_from']]
         writer = csv.DictWriter(f, fieldnames=header)
         writer.writeheader()
