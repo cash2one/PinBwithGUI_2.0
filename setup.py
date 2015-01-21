@@ -9,8 +9,8 @@ base = None
 if sys.platform == "win32":
     base = "Console"
 setup(
-    name="pinbiao Nin1",
+    name="pinbiao",
     version="0.1",
     description="Pinbiao",
-    executables=[Executable("pinbiao.py", base=base, icon='image/icon.ico')]
+    executables=[Executable("test.py", base=base, icon='image/icon.ico')]
     )

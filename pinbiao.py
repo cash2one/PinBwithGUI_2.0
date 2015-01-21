@@ -1,11 +1,12 @@
 __author__ = 'xuhuan'
+# -*- coding:utf-8 -*-
 import csvfile
 import sys
 import csv
 import os
 import functions
 import dedup
-
+import codecs
 
 ads_channels = ['百度搜索', '百度网盟', '360搜索', '搜狗搜索']
 keys_bdss = []
@@ -135,32 +136,20 @@ def pinbiao(f1, f2, mod=None):
     return rst, information
 
 
-def excel_file_list(raw_path):
+def file_list(raw_path):
     all_files = os.listdir(raw_path)
-    excel_files = {}
-    j = 1
-    for i in range(len(all_files)):
-        filename = all_files[i].split('.')[0]
-        extension = all_files[i].split('.')[-1]
+    csv_files = []
+    for i in all_files:
+        extension = i.split('.')[-1]
         if extension == 'csv':
-            excel_files[j] = all_files[i]
-            j += 1
-        elif extension == 'xls':
-            excel_files[j] = all_files[i]
-            j += 1
-        elif extension == 'xlsx':
-            excel_files[j] = all_files[i]
-            j += 1
-    for i in range(1, len(excel_files) + 1):
-        print(i, ',', excel_files[i], '\n')
-    return excel_files
-
+            csv_files.append(i)
+    for i in csv_files:
+        print(csv_files.index(i) + 1, ',', i, '\n')
+    return csv_files
 
 if __name__ == '__main__':
-    file1 = 'input/adm_20150120_232318.csv'
-    file2 = 'input/Baidu-大皇帝1-8141563-投放网络-2015-01-19-2015-01-19.csv'
-    input_folder = '原始表格'
-    output_folder = '拼表结果'
+    input_folder = 'input'
+    output_folder = 'output'
     if os.path.isdir(input_folder):
         pass
     else:
@@ -169,13 +158,13 @@ if __name__ == '__main__':
         pass
     else:
         os.mkdir(output_folder)
-    file_list = excel_file_list(input_folder)
-    file1 = int(input('选择第一个表格：'))
-    while file1 not in file_list.keys():
-        file1 = int(input('重选第一个表格：'))
-    file2 = int(input('选择第二个表格：'))
-    while file2 not in file_list.keys() or file2 == file1:
-        file2 = int(input('重选第二个表格：'))
+    csv_files = file_list(input_folder)
+    file1 = int(input(u'q1'))
+    while file1 not in csv_files.keys():
+        file1 = int(input(u'q1'))
+    file2 = int(input(u'q2'))
+    while file2 not in csv_files.keys() or file2 == file1:
+        file2 = int(input(u'q2'))
     file1 = input_folder + '/' + file_list[file1]
     file2 = input_folder + '/' + file_list[file2]
     result, info = pinbiao(file1, file2)
