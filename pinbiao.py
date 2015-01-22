@@ -169,6 +169,7 @@ if __name__ == '__main__':
     file2 = input_folder + '/' + csv_files[file2 - 1]
     result, info = pinbiao(file1, file2)
     result_name = info['file_from'] + '-' + info['game'] + '-' + info['begin_date'] + '至' + info['end_date']
+    #print(info)
     with open(output_folder + '/' + result_name + '.csv', 'w', newline='') as f:
         header = keys_order[info['file_from']]
         writer = csv.DictWriter(f, fieldnames=header)

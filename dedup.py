@@ -28,21 +28,22 @@ def dedup(data, channel):
     elif channel == '360搜索':
         for ii in data:
             if '短语'in ii['推广组'] or '词组'in ii['推广组']:
-                ii['关键词'] += 'p'
+                ii['关键词'] = 'p' + ii['关键词']
             if '广泛' in ii['推广组']:
-                ii['关键词'] += 'b'
+                ii['关键词'] = 'b' + ii['关键词']
         for i in data:
             index = data.index(i)
             for j in data[index + 1:]:
                 if i['关键词'] == j['关键词']:
                     i['展示次数'] += j['展示次数']
                     i['点击次数'] += j['点击次数']
-                    i['总费用'] += j['总费用']
+                    i['总费用'] = float(i['总费用']) + float(j['总费用'])
+                    # todo:类型异常处理
                     if int(i['展示次数']):
                         i['点击率'] = round(int(i['点击次数']) / int(i['展示次数']), 4)
                         i['点击率'] = str(i['点击率'] * 100) + '%'
                     if int(i['点击次数']):
-                        i['平均每次点击费用'] = round(int(i['总费用']) / int(i['点击次数']), 2)
+                        i['平均每次点击费用'] = round(float(i['总费用'])/ int(i['点击次数']), 2)
                     data.remove(j)
         data.sort(key=lambda obj: obj.get('关键词'))
         return data
