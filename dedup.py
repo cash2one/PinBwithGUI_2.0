@@ -2,6 +2,16 @@ __author__ = 'xuhuan'
 import sys
 
 
+def dict_slice(dic, slic):
+    if set(list(dic.keys()) + slic) != set(slic):
+        print('--切片键值片段错误--')
+        sys.exit()
+    new_dic = {}
+    for key in slic:
+        new_dic.update(key, dic[key])
+    return new_dic
+
+
 # 对搜索表按关键词去重
 def dedup(data, channel):
     if channel == '百度搜索':
@@ -86,6 +96,26 @@ def dedup(data, channel):
         data.sort(key=lambda obj: obj.get('关键词'))
         return data
     elif channel == '搜狗搜索':
-        pass
+        for ii in data:
+            if '短语'in ii['推广组'] or '词组'in ii['推广组']:
+                ii['关键词'] = 'p' + ii['关键词']
+            if '广泛' in ii['推广组']:
+                ii['关键词'] = 'b' + ii['关键词']
+        for i in data:
+            index = data.index(i)
+            for j in data[index + 1:]:
+                if i['关键词'] == j['关键词']:
+                    i['展示数'] += j['展示数']
+                    i['点击数'] += j['点击数']
+                    i['消耗'] = float(i['消耗']) + float(j['消耗'])
+                    # todo:类型异常处理，try thorough
+                    if int(i['展示数']):
+                        i['点击率'] = round(int(i['点击数']) / int(i['展示数']), 4)
+                        i['点击率'] = str(i['点击率'] * 100) + '%'
+                    if int(i['点击数']):
+                        i['点击均价'] = round(float(i['总费用'])/ int(i['点击数']), 2)
+                    data.remove(j)
+        data.sort(key=lambda obj: obj.get('关键词'))
+        return data
     else:
         return data

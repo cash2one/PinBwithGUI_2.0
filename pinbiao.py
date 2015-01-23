@@ -15,7 +15,7 @@ keys_bdwm = ['网站', '推广计划', '推广组', '推广组状态', '所属�
              '独立访客点击率', '平均点击价格(元)', '平均独立访客点击价格(元)', '千次展现成本(元)',
              '总费用(元)', '到达率', '二跳率', '停留时间', '直接转化', '间接转化']
 keys_360ss = ['推广账户', '推广计划', '推广组', '关键词', '平均排名', '展示次数', '点击次数', '点击率', '总费用', '平均每次点击费用']
-keys_sgss = []
+keys_sgss = ['', '日期', '账户', '推广计划', '推广组', '关键词', '消耗', '点击数', '展示数', '点击率', '点击均价', '平均排名', '转化次数']
 keys_adm_wm = ['spreader_id', '广告商', 'plkw', 'keyword', '注册人数', '有效人数', '次留人数',
                '二登人数', '活跃人数', '总充值人数', '总充值', '新充值人数', '新充值',
                '有效率', '次留率', '二登率', '活跃率']
@@ -41,9 +41,11 @@ keys_order_bdwm = ['网站', '推广计划', '推广组', '推广组状态', '�
 keys_order_bdss = []
 keys_order_sgss = []
 keys_order = {'百度搜索': keys_order_bdss, '百度网盟': keys_order_bdwm, '360搜索': keys_order_360ss, '搜狗搜索': keys_order_sgss}
-account_2_game_360 = {'游族大皇帝': '大皇帝'}
+account_game_360 = {'游族大皇帝': '大皇帝'}
+account_2_game_sg = {'': '大皇帝'}
 keys_channels = {'百度搜索': keys_bdss, '百度网盟': keys_bdwm, '360搜索': keys_360ss, '搜狗搜索': keys_sgss}
 bd_account_prefix = {'Baidu-大皇帝1-8141563': ['百度网盟-大皇帝', '大皇帝']}
+
 
 def getdata(file):
     file = csvfile.CsvFile(file)
@@ -54,12 +56,17 @@ def getdata(file):
         sys.exit()
     if file.info['file_from'] == '360搜索':
         var = file.data[0]['推广账户']
-        file.info['game'] = account_2_game_360[var]
+        file.info['game'] = account_game_360[var]
     elif file.info['file_from'] == '百度搜索':
         var = file.data[0]['账户']
         file.info['game'] = bd_account_prefix[var][1]
     elif file.info['file_from'] == '百度网盟':
         pass
+    elif file.info['file_from'] == '搜狗搜索':
+        var = file.data[1]['账户']
+        file.info['game'] = account_2_game_sg[var]
+        var1 = file.data[1]['日期']
+        file.info['begin_date'], file.info['end_date'] = var1.split('至')
     elif file.info['file_from'] == '页游后台':
         # data[0] 是和 key_adm_xx 只有顺序不同的list
         st = set(list(file.data[0].keys()))
