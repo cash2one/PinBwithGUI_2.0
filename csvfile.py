@@ -62,6 +62,9 @@ class CsvFile(object):
             else:
                 info['begin_date'] = date[0]
                 info['end_date'] = date[1]
+        elif file_name == '统计报告':
+            info['file_from'] = '搜狗搜索'
+            info['type'] = '搜索'
         elif file_name.startswith('adm_'):
             info['file_from'] = '页游后台'
         if '大皇帝' in file_name:
