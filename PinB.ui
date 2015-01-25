@@ -64,68 +64,6 @@
      <string>文件</string>
     </property>
    </widget>
-   <widget class="QScrollArea" name="scrollArea">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>70</y>
-      <width>250</width>
-      <height>361</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>248</width>
-       <height>359</height>
-      </rect>
-     </property>
-     <widget class="QWidget" name="">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>40</y>
-        <width>171</width>
-        <height>281</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-   </widget>
    <widget class="QPlainTextEdit" name="plainTextEdit">
     <property name="geometry">
      <rect>
@@ -183,9 +121,9 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>350</x>
       <y>20</y>
-      <width>340</width>
+      <width>310</width>
       <height>193</height>
      </rect>
     </property>
@@ -211,6 +149,79 @@
       <string/>
      </property>
     </widget>
+    <widget class="QSplitter" name="splitter_2">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>40</y>
+       <width>45</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QLabel" name="label_from1">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_game1">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_date11">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_date12">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QSplitter" name="splitter">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>30</y>
+       <width>45</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>来源：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>游戏：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>日期：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <zorder>checkBox</zorder>
+    <zorder>label</zorder>
+    <zorder>label_2</zorder>
+    <zorder>label_3</zorder>
+    <zorder>label_4</zorder>
+    <zorder>label</zorder>
+    <zorder>splitter_2</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
@@ -243,6 +254,16 @@
       <string/>
      </property>
     </widget>
+   </widget>
+   <widget class="QTableView" name="tableView">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>70</y>
+      <width>281</width>
+      <height>361</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -321,22 +342,6 @@
     <hint type="destinationlabel">
      <x>349</x>
      <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_fresh</sender>
-   <signal>clicked()</signal>
-   <receiver>scrollArea</receiver>
-   <slot>update()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>235</x>
-     <y>62</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>154</x>
-     <y>276</y>
     </hint>
    </hints>
   </connection>
