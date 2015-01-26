@@ -1,4 +1,4 @@
-﻿__author__ = 'xuhuan'
+﻿﻿__author__ = 'xuhuan'
 import csv
 import re
 import os
@@ -64,6 +64,7 @@ class CsvFile(object):
                 info['end_date'] = date[1]
         elif file_name == '统计报告':
             info['file_from'] = '搜狗搜索'
+            info['type'] = '搜索'
         elif file_name.startswith('adm_'):
             info['file_from'] = '页游后台'
         if '大皇帝' in file_name:

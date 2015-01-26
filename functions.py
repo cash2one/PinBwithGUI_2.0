@@ -65,8 +65,7 @@ def pinbiao_360ss(data1, data2, info):
 
 
 def pinbiao_sgss(data1, data2, info):
-    adm_rest_keys = ['弹出PV', '弹出IP', '注册人数', '激活人数', '有效人数', '次留人数', '二登人数', '活跃人数', '新充值人数', '新充值',
-                     '注册转换率', '激活率', '有效率', '次留率', '二登率', '活跃率']
+    adm_rest_keys = ['弹出PV', '弹出IP', '注册人数', '激活人数', '有效人数', '次留人数', '二登人数', '活跃人数', '新充值人数', '新充值', '注册转换率', '激活率', '有效率', '次留率', '二登率', '活跃率']
     adm_del_keys = ['keyword_id', '关键词', '开始时间', '结束时间', '游戏', '总充值', '总充值人数']
     new_keys = ['注册成本', '次留成本']
     for i in data1:
@@ -76,9 +75,9 @@ def pinbiao_sgss(data1, data2, info):
         for j in data2:
             if i['关键词'] == j['关键词']:
                 if int(j['注册人数']):
-                    i.update({'注册成本': round(float(i['消耗']) / int(j['注册人数']), 2)})
+                    i.update({'注册成本': round(float(i['总费用']) / int(j['注册人数']), 2)})
                 if int(j['次留人数']):
-                    i.update({'次留成本': round(float(i['消耗']) / int(j['次留人数']), 2)})
+                    i.update({'次留成本': round(float(i['总费用']) / int(j['次留人数']), 2)})
                 for del_key in adm_del_keys:
                     del j[del_key]
                 i.update(j)
