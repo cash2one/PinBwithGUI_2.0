@@ -1,4 +1,4 @@
-﻿﻿__author__ = 'xuhuan'
+﻿__author__ = 'xuhuan'
 import csv
 import re
 import os

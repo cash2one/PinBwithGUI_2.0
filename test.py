@@ -14,12 +14,14 @@ import pinbiao
 
 class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
     WorkPath = 'C:/Users/xuhuan/Downloads'
+    isFile1Busy = False
+    isFile2Busy = False
 
     def __init__(self, parent=None):
         super(MainWindows, self).__init__(parent)
         self.setupUi(self)
         # self.errorMessageDialog = QErrorMessage(self)
-        self.pushButton_file.clicked.connect(self.select_file())
+        self.pushButton_file.clicked.connect(self.select_file)
         #self.table_setting()
         #self.display_file_info()
 
@@ -37,10 +39,18 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
         file = pinbiao.getdata(file)
         info = file.info
         # todo: key error
-        self.label_from1.setText(info['file_from'])
-        self.label_game1.setText(info['game'])
-        self.label_date11.setText(info['begin_date'])
-        self.label_date12.setText(info['end_date'])
+        if not self.isFile1Busy:
+            self.label_from1.setText(info['file_from'])
+            self.label_game1.setText(info['game'])
+            self.label_date11.setText(info['begin_date'])
+            self.label_date12.setText(info['end_date'])
+            self.isFile1Busy = True
+        elif not self.isFile2Busy:
+            self.label_from2.setText(info['file_from'])
+            self.label_game2.setText(info['game'])
+            self.label_date21.setText(info['begin_date'])
+            self.label_date22.setText(info['end_date'])
+            self.isFile2Busy = True
 
     def short_name(self):
         pass

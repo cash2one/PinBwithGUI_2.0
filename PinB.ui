@@ -35,7 +35,7 @@
    <string>拼表</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="image.qrc">
+   <iconset>
     <normaloff>:/image/icon.png</normaloff>:/image/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -69,7 +69,7 @@
      <rect>
       <x>330</x>
       <y>450</y>
-      <width>340</width>
+      <width>331</width>
       <height>32</height>
      </rect>
     </property>
@@ -121,9 +121,9 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>329</x>
       <y>20</y>
-      <width>310</width>
+      <width>331</width>
       <height>193</height>
      </rect>
     </property>
@@ -152,9 +152,9 @@
     <widget class="QSplitter" name="splitter_2">
      <property name="geometry">
       <rect>
-       <x>200</x>
-       <y>40</y>
-       <width>45</width>
+       <x>150</x>
+       <y>30</y>
+       <width>141</width>
        <height>131</height>
       </rect>
      </property>
@@ -215,12 +215,8 @@
       </property>
      </widget>
     </widget>
+    <zorder>splitter</zorder>
     <zorder>checkBox</zorder>
-    <zorder>label</zorder>
-    <zorder>label_2</zorder>
-    <zorder>label_3</zorder>
-    <zorder>label_4</zorder>
-    <zorder>label</zorder>
     <zorder>splitter_2</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
@@ -228,7 +224,7 @@
      <rect>
       <x>330</x>
       <y>240</y>
-      <width>340</width>
+      <width>331</width>
       <height>192</height>
      </rect>
     </property>
@@ -254,13 +250,79 @@
       <string/>
      </property>
     </widget>
+    <widget class="QSplitter" name="splitter_3">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>36</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>来源：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>游戏：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="text">
+       <string>日期：</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QSplitter" name="splitter_4">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>30</y>
+       <width>151</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QLabel" name="label_from2">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_game2">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_date21">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_date22">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QTableView" name="tableView">
     <property name="geometry">
      <rect>
       <x>30</x>
       <y>70</y>
-      <width>281</width>
+      <width>251</width>
       <height>361</height>
      </rect>
     </property>
@@ -272,7 +334,7 @@
      <x>0</x>
      <y>0</y>
      <width>700</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
