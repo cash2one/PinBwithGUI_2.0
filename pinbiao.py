@@ -149,16 +149,34 @@ def pinbiao(f1, f2, mod=None):
     return rst, information
 
 
-def file_list(raw_path):
-    all_files = os.listdir(raw_path)
+def file_list(path):
+    all_files = os.listdir(path)
     csv_file = []
     for i in all_files:
         extension = i.split('.')[-1]
         if extension == 'csv':
-            csv_file.append(i)
+            csv_file.append(i.split('/')[-1])
+    '''
     for i in csv_file:
         print(csv_file.index(i) + 1, ',', i, '\n')
+    '''
     return csv_file
+
+
+def folder_check(path):
+    if os.path.isdir(path):
+        pass
+    else:
+        os.mkdir(path)
+
+
+def write_csv(name, path):
+    with open(path + '/' + name + '.csv', 'w', newline='') as ff:
+        header = keys_order[info['file_from']]
+        writer = csv.DictWriter(ff, fieldnames=header)
+        writer.writeheader()
+        for i in result:
+            writer.writerow(i)
 
 if __name__ == '__main__':
     input_folder = '原始表格'

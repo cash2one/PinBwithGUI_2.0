@@ -35,7 +35,7 @@
    <string>拼表</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="image.qrc">
     <normaloff>:/image/icon.png</normaloff>:/image/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -43,7 +43,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>20</y>
+      <y>15</y>
       <width>101</width>
       <height>33</height>
      </rect>
@@ -67,9 +67,9 @@
    <widget class="QPlainTextEdit" name="plainTextEdit">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>30</x>
       <y>450</y>
-      <width>331</width>
+      <width>321</width>
       <height>32</height>
      </rect>
     </property>
@@ -83,9 +83,9 @@
    <widget class="QPushButton" name="pushButton_action">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>400</x>
       <y>450</y>
-      <width>251</width>
+      <width>271</width>
       <height>33</height>
      </rect>
     </property>
@@ -102,8 +102,8 @@
    <widget class="QPushButton" name="pushButton_fresh">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>20</y>
+      <x>260</x>
+      <y>15</y>
       <width>91</width>
       <height>33</height>
      </rect>
@@ -121,10 +121,10 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>329</x>
-      <y>20</y>
-      <width>331</width>
-      <height>193</height>
+      <x>400</x>
+      <y>13</y>
+      <width>270</width>
+      <height>200</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -152,10 +152,10 @@
     <widget class="QSplitter" name="splitter_2">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>30</y>
-       <width>141</width>
-       <height>131</height>
+       <x>100</x>
+       <y>20</y>
+       <width>161</width>
+       <height>161</height>
       </rect>
      </property>
      <property name="orientation">
@@ -185,10 +185,10 @@
     <widget class="QSplitter" name="splitter">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>30</y>
+       <x>10</x>
+       <y>20</y>
        <width>45</width>
-       <height>141</height>
+       <height>161</height>
       </rect>
      </property>
      <property name="orientation">
@@ -222,10 +222,10 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>400</x>
       <y>240</y>
-      <width>331</width>
-      <height>192</height>
+      <width>270</width>
+      <height>200</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -253,10 +253,10 @@
     <widget class="QSplitter" name="splitter_3">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>40</y>
-       <width>36</width>
-       <height>141</height>
+       <x>10</x>
+       <y>20</y>
+       <width>45</width>
+       <height>161</height>
       </rect>
      </property>
      <property name="orientation">
@@ -286,10 +286,10 @@
     <widget class="QSplitter" name="splitter_4">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>30</y>
-       <width>151</width>
-       <height>141</height>
+       <x>100</x>
+       <y>20</y>
+       <width>161</width>
+       <height>161</height>
       </rect>
      </property>
      <property name="orientation">
@@ -317,15 +317,32 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QTableView" name="tableView">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>70</y>
-      <width>251</width>
-      <height>361</height>
+      <y>60</y>
+      <width>321</width>
+      <height>381</height>
      </rect>
     </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::CustomContextMenu</enum>
+    </property>
+    <property name="showGrid">
+     <bool>false</bool>
+    </property>
+    <property name="columnCount">
+     <number>1</number>
+    </property>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>文件名</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -334,7 +351,7 @@
      <x>0</x>
      <y>0</y>
      <width>700</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
