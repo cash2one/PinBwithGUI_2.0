@@ -51,7 +51,7 @@ keys_order = {'百度搜索': keys_order_bdss, '百度网盟': keys_order_bdwm, 
 account_game_360 = {'游族大皇帝': '大皇帝', '9787风云': '大皇帝'}
 
 bd_account_prefix = {'Baidu-大皇帝1-8141563': ['百度网盟-大皇帝', '大皇帝']}
-account_game_sg = {' ': '大皇帝'}
+account_game_sg = {'qszg20140519@youzu.com': '大皇帝'}
 
 
 def getdata(file):
