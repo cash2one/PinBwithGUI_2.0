@@ -80,9 +80,15 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
             self.tableWidget.setItem(row, 0, fileNameItem)
 
     def action_pinbiao(self):
+        self.statusbar.showMessage('正在生成结果..')
         result, info = pinbiao.pinbiao(self.file1, self.file2)
-        result_name = info['file_from'] + '-' + info['game'] + '-' + info['begin_date'] + '至' + info['end_date']
+        if self.plainTextEdit.toPlainText():
+            result_name = self.plainTextEdit.toPlainText()
+        else:
+            result_name = info['file_from'] + '-' + info['game'] + '-' + info['begin_date'] + '至' + info['end_date']
+        #self.plainTextEdit.
         pinbiao.write_csv(result_name, self.output_folder)
+        self.statusbar.showMessage('拼表成功!', 6000)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

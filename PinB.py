@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'PinB.ui'
 #
-# Created: Thu Jan 29 00:49:38 2015
+# Created: Thu Jan 29 20:43:36 2015
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -39,6 +39,11 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.plainTextEdit.sizePolicy().hasHeightForWidth())
         self.plainTextEdit.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("黑体")
+        font.setPointSize(12)
+        self.plainTextEdit.setFont(font)
+        self.plainTextEdit.setInputMethodHints(QtCore.Qt.ImhMultiLine)
         self.plainTextEdit.setObjectName("plainTextEdit")
         self.pushButton_action = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_action.setGeometry(QtCore.QRect(400, 450, 271, 33))
@@ -150,7 +155,7 @@ class Ui_MainWindow(object):
         self.tableWidget.verticalHeader().setVisible(False)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 700, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 700, 23))
         self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
