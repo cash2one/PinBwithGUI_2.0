@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import (QMainWindow, QMessageBox, QAbstractItemView, QAppli
                              QDialog, QFileDialog, QGridLayout, QHBoxLayout, QHeaderView, QLabel,
                              QProgressDialog, QPushButton, QSizePolicy, QTableWidget,
                              QTableWidgetItem)
-from PinB import Ui_MainWindow
+from PinBui import Ui_MainWindow
 import sys
 import pinbiao
 
@@ -28,6 +28,9 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
         self.pushButton_file.clicked.connect(self.select_file)
         self.pushButton_fresh.clicked.connect(self.show_files_in_table)
         self.pushButton_action.clicked.connect(self.action_pinbiao)
+        self.actionAbout.triggered.connect(self.about)
+        self.actionSettingpath.triggered.connect(self.set_WorkPath)
+        #self.plainTextEdit.setPlainText('woshishabi')
         pinbiao.folder_check(self.output_folder)
         self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableWidget.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
@@ -38,8 +41,15 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
         # self.tableView.cellEntered.connect(self.open_file_of_item)
         # self.tableView.cellDoubleClicked.connect(self.doubleclick_to_add_file)
 
+    def about(self):
+        QMessageBox.about(self, "关于", "广告<b>拼表</b>工具" + '\n' + 'www.youzu.com')
+
+    def set_WorkPath(self):
+        new_path = QFileDialog.getExistingDirectory(self, "工作目录", self.WorkPath)
+        self.WorkPath = new_path
+        print(self.WorkPath)
+
     def select_file(self):
-        # open_path = self.directory_path.currentText()
         path = self.WorkPath
         options = QFileDialog.Options()
         file_name, _ = QFileDialog.getOpenFileName(self, "选择..", 'C:/Users/xuhuan/Downloads', "Text Files (*.csv);;All Files (*)",
@@ -86,7 +96,7 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
             result_name = self.plainTextEdit.toPlainText()
         else:
             result_name = info['file_from'] + '-' + info['game'] + '-' + info['begin_date'] + '至' + info['end_date']
-        #self.plainTextEdit.
+        self.plainTextEdit.setPlainText(result_name)
         pinbiao.write_csv(result_name, self.output_folder)
         self.statusbar.showMessage('拼表成功!', 6000)
 
