@@ -18,6 +18,7 @@ class CsvFile(object):
             info = {'tip': '--- 不存在的文件 ---'}
             # self.data = info
             return info
+        # print(self.file_path)
         prefix, suffix = self.file_path.split('.')
 
         if suffix != 'csv':
@@ -25,6 +26,7 @@ class CsvFile(object):
             # self.data = info
             return info
         file_name = prefix.split('/')[-1]
+        #print(file_name)
         info = {'file_from': '', 'begin_date': '', 'end_date': '', 'game': '', 'type': ''}
 
         if file_name.startswith('Baidu-') and '投放网络' in file_name:
@@ -97,8 +99,12 @@ class CsvFile(object):
                 dct = dict(zip(rows[0], rows[i + 1]))
                 dct.update(ds)
                 dicts.append(dct)
+        else:
+            dicts = ['错误']
+            print(dicts)
         self.data = dicts
         return dicts
+        # todo: global 变量 dicts
 
 
 

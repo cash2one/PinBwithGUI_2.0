@@ -13,7 +13,7 @@ import pinbiao
 
 
 class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
-    WorkPath = 'C:/Users/xuhuan/Downloads'
+    WorkPath = ''
     output_folder = '拼表结果'
     file1 = ''
     file2 = ''
@@ -25,58 +25,63 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
         super(MainWindows, self).__init__(parent)
         self.setupUi(self)
         # self.errorMessageDialog = QErrorMessage(self)
-        self.pushButton_file.clicked.connect(self.select_file)
+        self.pushButton_file.clicked.connect(self.select_file_button)
         self.pushButton_fresh.clicked.connect(self.show_files_in_table)
         self.pushButton_action.clicked.connect(self.action_pinbiao)
         self.actionAbout.triggered.connect(self.about)
         self.actionSettingpath.triggered.connect(self.set_WorkPath)
-        #self.plainTextEdit.setPlainText('woshishabi')
         pinbiao.folder_check(self.output_folder)
+        self.get_workpath()
         self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.tableWidget.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         self.show_files_in_table()
-        # self.file_list_table.cellActivated.connect(self.open_file_of_item)
-        # self.file_list_table.cellPressed.connect(self.open_file_of_item)
-        # self.tableView.cellClicked.connect(self.show_file_info)
-        # self.tableView.cellEntered.connect(self.open_file_of_item)
-        # self.tableView.cellDoubleClicked.connect(self.doubleclick_to_add_file)
+        self.tableWidget.cellDoubleClicked.connect(self.select_file_table)
 
     def about(self):
         QMessageBox.about(self, "关于", "广告<b>拼表</b>工具" + '\n' + 'www.youzu.com')
+
+    def get_workpath(self):
+        self.WorkPath = pinbiao.workfolder()
+        if self.WorkPath == 'error':
+            self.WorkPath = None
 
     def set_WorkPath(self):
         new_path = QFileDialog.getExistingDirectory(self, "工作目录", self.WorkPath)
         self.WorkPath = new_path
         print(self.WorkPath)
 
-    def select_file(self):
+    def select_file_button(self):
         path = self.WorkPath
         options = QFileDialog.Options()
-        file_name, _ = QFileDialog.getOpenFileName(self, "选择..", 'C:/Users/xuhuan/Downloads', "Text Files (*.csv);;All Files (*)",
+        file_name, _ = QFileDialog.getOpenFileName(self, "选择..", path, "Text Files (*.csv);;All Files (*)",
                                                     options= options)
         if file_name:
             self.display_file_info(file_name)
 
+    def select_file_table(self, row, column):
+        item = self.tableWidget.item(row, 0)
+        self.display_file_info(self.WorkPath + '/' + item.text())
+
     def display_file_info(self, file):
         # todo: key error
-        if not self.isFile1Busy:
+        if not self.checkBox.isChecked():
+            self.file1 = file
             file = pinbiao.getdata(file)
             info = file.info
             self.label_from1.setText(info['file_from'])
             self.label_game1.setText(info['game'])
             self.label_date11.setText(info['begin_date'])
             self.label_date12.setText(info['end_date'])
-            self.isFile1Busy = True
-            self.file1 = file
-        elif not self.isFile2Busy:
+            #self.checkBox.setChecked(True)
+        elif not self.checkBox_2.isChecked():
+            self.file2 = file
             file = pinbiao.getdata(file)
             info = file.info
             self.label_from2.setText(info['file_from'])
             self.label_game2.setText(info['game'])
             self.label_date21.setText(info['begin_date'])
             self.label_date22.setText(info['end_date'])
-            self.isFile2Busy = True
-            self.file2 = file
+            #self.checkBox_2.setChecked(True)
 
     def show_files_in_table(self):
         self.tableWidget.setRowCount(0)
@@ -97,8 +102,9 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
         else:
             result_name = info['file_from'] + '-' + info['game'] + '-' + info['begin_date'] + '至' + info['end_date']
         self.plainTextEdit.setPlainText(result_name)
-        pinbiao.write_csv(result_name, self.output_folder)
+        pinbiao.write_csv(result_name, info, result, self.output_folder)
         self.statusbar.showMessage('拼表成功!', 6000)
+        self.plainTextEdit.clear()
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

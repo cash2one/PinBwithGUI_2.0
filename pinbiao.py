@@ -54,6 +54,13 @@ bd_account_prefix = {'Baidu-大皇帝1-8141563': ['百度网盟-大皇帝', '大
 account_game_sg = {'qszg20140519@youzu.com': '大皇帝'}
 
 
+def workfolder():
+    with open('setting.ini', 'r') as f:
+        content = f.read()
+    content = content.split('=')[-1]
+    return content
+
+
 def getdata(file):
     file = csvfile.CsvFile(file)
     if 'file_from' in file.info:
@@ -61,6 +68,7 @@ def getdata(file):
     else:
         print('--表格内容错误--')
         sys.exit()
+    # print(file.info)
     if file.info['file_from'] == '360搜索':
         var = file.data[0]['推广账户']
         file.info['game'] = account_game_360[var]
@@ -170,14 +178,14 @@ def folder_check(path):
         os.mkdir(path)
 
 
-def write_csv(name, path):
+def write_csv(name, info, data, path):
     with open(path + '/' + name + '.csv', 'w', newline='') as ff:
         header = keys_order[info['file_from']]
         writer = csv.DictWriter(ff, fieldnames=header)
         writer.writeheader()
-        for i in result:
+        for i in data:
             writer.writerow(i)
-
+'''
 if __name__ == '__main__':
     input_folder = '原始表格'
     output_folder = '拼表结果'
@@ -208,3 +216,4 @@ if __name__ == '__main__':
         for i in result:
             writer.writerow(i)
     sys.exit()
+'''
