@@ -158,6 +158,10 @@ def pinbiao(f1, f2, mod=None):
 
 
 def file_list(path):
+    if os.path.isdir(path):
+        pass
+    else:
+        os.mkdir(path)
     all_files = os.listdir(path)
     csv_file = []
     for i in all_files:

@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import (QMainWindow, QMessageBox, QAbstractItemView, QAppli
 from PinBui import Ui_MainWindow
 import sys
 import pinbiao
+from dialog_set_path import Ui_Dialog
 
 
 class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
@@ -46,9 +47,11 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
             self.WorkPath = None
 
     def set_WorkPath(self):
-        new_path = QFileDialog.getExistingDirectory(self, "工作目录", self.WorkPath)
+        dialog = SetFolderDialog(parent=self)
+        dialog.show()
+        #new_path = QFileDialog.getExistingDirectory(self, "工作目录", self.WorkPath)
         self.WorkPath = new_path
-        print(self.WorkPath)
+        return new_path
 
     def select_file_button(self):
         path = self.WorkPath
@@ -106,6 +109,19 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
         self.statusbar.showMessage('拼表成功!', 6000)
         self.plainTextEdit.clear()
 
+
+class SetFolderDialog(QDialog, Ui_Dialog):
+    folder = ''
+
+    def __init__(self):
+        super(SetFolderDialog, self).__init__(self)
+
+    def select_folder(self):
+        self.folder = QFileDialog.getExistingDirectory(self, "工作目录", self.WorkPath)
+        self.lineEdit.setText(self.folder)
+
+    def get_folder(self):
+        return self.lineEdit.text()
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     win = MainWindows()
