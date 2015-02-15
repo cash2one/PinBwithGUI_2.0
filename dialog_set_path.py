@@ -2,13 +2,12 @@
 
 # Form implementation generated from reading ui file 'dialog_set_path.ui'
 #
-# Created: Sat Feb 14 18:08:48 2015
+# Created: Sun Feb 15 12:08:10 2015
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):

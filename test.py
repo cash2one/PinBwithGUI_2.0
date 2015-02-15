@@ -11,6 +11,7 @@ from PinBui import Ui_MainWindow
 import sys
 import pinbiao
 from dialog_set_path import Ui_Dialog
+import extension
 
 
 class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
@@ -47,11 +48,12 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
             self.WorkPath = None
 
     def set_WorkPath(self):
+        #dialog = extension.FindDialog(parent=self)
         dialog = SetFolderDialog(parent=self)
         dialog.show()
         #new_path = QFileDialog.getExistingDirectory(self, "工作目录", self.WorkPath)
-        self.WorkPath = new_path
-        return new_path
+        #self.WorkPath = new_path
+        #return new_path
 
     def select_file_button(self):
         path = self.WorkPath
@@ -112,9 +114,14 @@ class MainWindows(QtWidgets.QMainWindow, QDialog, Ui_MainWindow):
 
 class SetFolderDialog(QDialog, Ui_Dialog):
     folder = ''
-
-    def __init__(self):
-        super(SetFolderDialog, self).__init__(self)
+    WorkPath = 'D:\workstation'
+    def __init__(self, parent=None):
+        super(SetFolderDialog, self).__init__(parent)
+        self.setupUi(self) # 不写这个就会只有框没有界面内容
+        self.setWindowTitle("设置路径")
+        self.lineEdit.setText(self.WorkPath)
+        self.pushButton.clicked.connect(self.select_folder)
+        self.accepted.connect(self.get_folder)
 
     def select_folder(self):
         self.folder = QFileDialog.getExistingDirectory(self, "工作目录", self.WorkPath)
@@ -122,6 +129,7 @@ class SetFolderDialog(QDialog, Ui_Dialog):
 
     def get_folder(self):
         return self.lineEdit.text()
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     win = MainWindows()
