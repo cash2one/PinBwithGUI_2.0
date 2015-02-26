@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'PinBui.ui'
 #
-# Created: Fri Jan 30 17:56:29 2015
+# Created: Tue Feb 17 20:39:07 2015
 #      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -141,13 +141,9 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
         self.tableWidget.verticalHeader().setVisible(False)
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.plainTextEdit.setGeometry(QtCore.QRect(30, 450, 321, 33))
-        font = QtGui.QFont()
-        font.setFamily("宋体")
-        font.setPointSize(10)
-        self.plainTextEdit.setFont(font)
-        self.plainTextEdit.setObjectName("plainTextEdit")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(30, 450, 321, 31))
+        self.lineEdit.setObjectName("lineEdit")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 700, 23))

@@ -9,24 +9,22 @@ bd_account_prefix = {'Baidu-大皇帝1-8141563': ['百度网盟-大皇帝', '大
 
 class CsvFile(object):
     def __init__(self, file_path):
+        self.error = None
         self.file_path = file_path
         self.data = None
-        self.info = self._file_info()
+        self.info = self.get_info(self)
 
-    def _file_info(self):
+    @staticmethod
+    def get_info(self):
         if not os.path.exists(self.file_path):
-            info = {'tip': '--- 不存在的文件 ---'}
-            # self.data = info
-            return info
-        # print(self.file_path)
+            self.error = '不存在的文件'
+            return None
         prefix, suffix = self.file_path.split('.')
 
         if suffix != 'csv':
-            info = {'tip': '-- 不支持的文件类型 --'}
-            # self.data = info
-            return info
+            self.error = '不支持的文件类型'
+            return None
         file_name = prefix.split('/')[-1]
-        #print(file_name)
         info = {'file_from': '', 'begin_date': '', 'end_date': '', 'game': '', 'type': ''}
 
         if file_name.startswith('Baidu-') and '投放网络' in file_name:
@@ -35,12 +33,17 @@ class CsvFile(object):
             reg = re.compile('^.*-.*-\d{7}')
             account = reg.findall(file_name)
             # account is a  list
-            prefix = bd_account_prefix[account[0]][0]
+            try:
+                prefix = bd_account_prefix[account[0]][0]
+            except:
+                self.error = '没记录的账户'
+                return None
             info.update({'prefix': prefix})
             regx = re.compile('20\d{2}-\d{2}-\d{2}')
             date = regx.findall(file_name)
             if not len(date) == 2:
-                print('date catch error')
+                self.error = '日期错误'
+                return None
             else:
                 info['begin_date'] = date[0]
                 info['end_date'] = date[1]
@@ -50,7 +53,8 @@ class CsvFile(object):
             regx = re.compile('2015\d{4}')
             date = regx.findall(file_name)
             if not len(date) == 2:
-                print('date catch error')
+                self.error = '日期错误'
+                return None
             else:
                 info['begin_date'] = date[0]
                 info['end_date'] = date[1]
@@ -100,8 +104,8 @@ class CsvFile(object):
                 dct.update(ds)
                 dicts.append(dct)
         else:
-            dicts = ['错误']
-            print(dicts)
+            self.error = '错误'
+            return None
         self.data = dicts
         return dicts
         # todo: global 变量 dicts

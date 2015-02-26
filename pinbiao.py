@@ -54,11 +54,11 @@ bd_account_prefix = {'Baidu-大皇帝1-8141563': ['百度网盟-大皇帝', '大
 account_game_sg = {'qszg20140519@youzu.com': '大皇帝'}
 
 
-def workfolder():
+def get_work_folder():
     with open('setting.ini', 'r') as f:
         content = f.read()
-    content = content.split('=')[-1]
-    return content
+    work_folder = content.split('=')[-1]
+    return work_folder
 
 
 def getdata(file):
@@ -66,8 +66,8 @@ def getdata(file):
     if 'file_from' in file.info:
         file.get_data()
     else:
-        print('--表格内容错误--')
-        sys.exit()
+        file = '--表格内容错误--'
+        #print('--表格内容错误--')
     # print(file.info)
     if file.info['file_from'] == '360搜索':
         var = file.data[0]['推广账户']
@@ -96,10 +96,12 @@ def getdata(file):
         elif st_wm == st and len(keys_adm_wm) == len(list(file.data[0].keys())):
             file.info['type'] = '网盟'
         else:
-            print('--页游后台表格有问题--')
-            sys.exit()
+            file = '--页游后台表格有问题--'
+            #print('--页游后台表格有问题--')
+            #sys.exit()
     else:
-        print('--不能识别来源的表格--')
+        file = '--不能识别来源的表格--'
+        #print('--不能识别来源的表格--')
         # todo: 哪个对象的 print
     return file
 
